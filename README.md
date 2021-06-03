@@ -55,6 +55,27 @@ A few more configuration files are needed to get it rolling.
 4. `OSDroidDB` is the local MySQL database storing workflow prediction history, labels and short-term document archive.
    Three tables need to be created for each.
 
+   **in CC7, you need to install MariaDB**
+   ```bash
+   sudo yum install MariaDB-server;
+   sudo systemctl start mariadb.service;
+   sudo mysql_secure_installation;
+   #https://mariadb.com/resources/blog/installing-mariadb-10-on-centos-7-rhel-7/
+   #https://linux.web.cern.ch/#additional-software-collections-available-for-slc6-and-cc7
+   ```
+   **To create a new user**
+   ```sql
+   GRANT ALL PRIVILEGES ON *.* TO 'droid'@'localhost' IDENTIFIED BY 'PASSWORD';
+   ```
+   
+   **To create the database**
+   ```bash
+   mysql -u droid -p
+   ```
+   ```sql
+   CREATE DATABASE OSDroidDB;
+   ```
+   
    **PredictionHistory**
    ```sql
    CREATE TABLE IF NOT EXISTS OSDroidDB.PredictionHistory (
